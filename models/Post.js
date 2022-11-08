@@ -19,18 +19,15 @@ Post.init(
         }
     },
     contents: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
-        validate: {
-            len: [2,5000]
-        }
     },
-    // reference username of the poster (the user that created the post)
-    poster: {
+    // reference id of the poster (the user that created the post)
+    user_id: {
         type: DataTypes.STRING,
         references: {
-            model: 'user',
-            key: 'username',
+            model: 'user', 
+            key: 'id',
         },
 
     },

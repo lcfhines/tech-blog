@@ -19,11 +19,11 @@ Comment.init(
         }
     },
     // reference username of the commenter (the user that created the comment)
-    commenter: {
+    user_id: {
         type: DataTypes.STRING,
         references: {
             model: 'user',
-            key: 'username',
+            key: 'id',
         },
 
     },
