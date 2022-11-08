@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models')
 
-// sign up (create username and password)
-    // credentials stored -> log in
 
-// CREATE new user
+// CREATE new user (sign up)
 router.post('/', async (req, res) => {
     try {
         const dbUserData = await User.create({
@@ -17,7 +15,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// login
+// POST login
 router.post('/login', async (req, res) => {
     try {
         const dbUserData = await User.findOne({
@@ -49,8 +47,15 @@ router.post('/login', async (req, res) => {
 });
 
 
-// logout
-
-
+// POST logout
+router.post('/logout', (req, res) => {
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
+});
 
 module.exports = router;
