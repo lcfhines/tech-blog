@@ -14,15 +14,15 @@ Post.init(
     title: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            len: [2,200]
-        }
+        // validate: {
+        //     len: [2,200]
+        // }
     },
     contents: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    // reference id of the poster (the user that created the post)
+    // reference id of the user that created the comment
     user_id: {
         type: DataTypes.STRING,
         references: {

@@ -12,13 +12,10 @@ Comment.init(
         autoIncrement: true,
     },
     comment: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
-        validate: {
-            len: [2,1000]
-        }
     },
-    // reference username of the commenter (the user that created the comment)
+    // reference id of the user that created the comment
     user_id: {
         type: DataTypes.STRING,
         references: {

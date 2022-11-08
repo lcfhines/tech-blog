@@ -10,8 +10,8 @@ User.hasMany(Post, {
     onDelete: 'CASCADE'
 });
 
-// post can only have one user that created it
-Post.hasOne(User, {
+// post belongs to user
+Post.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
@@ -21,8 +21,8 @@ User.hasMany(Comment, {
     onDelete: 'CASCADE'
 });
 
-// comment can only have one user that created it
-Comment.hasOne(User, {
+// comment belongs to user
+Comment.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
