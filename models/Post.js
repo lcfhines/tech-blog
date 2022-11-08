@@ -25,8 +25,8 @@ Post.init(
             len: [2,5000]
         }
     },
-    // reference username of the creator of the post
-    creator_username: {
+    // reference username of the poster (the user that created the post)
+    poster: {
         type: DataTypes.STRING,
         references: {
             model: 'user',
@@ -34,7 +34,6 @@ Post.init(
         },
 
     },
-
 }, 
 {
     sequelize,
