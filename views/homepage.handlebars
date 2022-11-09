@@ -1,3 +1,10 @@
-{{#each posts as |post|}}
-{{> post-details}}
-{{/each}}
+{{#if loggedIn}}
+<section class="container">
+    <h3>Recent Posts</h3>
+    <section class="flex-row justify-center">
+        {{#each posts as |post|}}
+        {{> post-details}}
+        {{/each}}
+    </section>
+</section>
+ {{/if}}
