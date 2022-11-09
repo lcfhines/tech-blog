@@ -17,7 +17,7 @@ Comment.init(
     },
     // reference id of the user that created the comment
     user_id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         references: {
             model: 'user',
             key: 'id',
