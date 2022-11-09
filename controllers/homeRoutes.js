@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models')
+const { User, Post, Comment } = require('../models')
 
 
 // displays existing blog posts
@@ -20,5 +20,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-
 // nav links for homepage, dashboard, log in
+
+module.exports = router;
