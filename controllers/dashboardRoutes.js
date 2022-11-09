@@ -18,13 +18,6 @@ router.get('/dashboard', async (req, res) => {
     });
 
 
-// CREATE post
-
-
-// UPDATE post
-
-
-// DELETE post
 
 
 
