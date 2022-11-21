@@ -20,6 +20,31 @@ router.get('/', async (req, res) => {
     }
 })
 
+// get one post
+router.get('/post/:id', async (req, res) => {
+    try {
+        const dbPostData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                }, {
+                    model: Comment,
+                    include: [User]
+                }
+            ],
+        });
+        const post = dbPostData.get({ plain: true });
+        res.render('post', {
+            ...post,
+            loggedIn: req.session.loggedIn,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+  });
+
 // login route
 router.get('/login', (req, res) => {
     if (req.sessionStore.loggedIn) {
@@ -29,26 +54,7 @@ router.get('/login', (req, res) => {
 });
 
 
-// get one post
-router.get('/post/:id', async (req, res) => {
-  try {
-      const dbPostData = await Post.findByPk({
-        where: {
-          id: req.params.id
-        },
-      });
 
-      const post = dbPostData.map((post) => post.get({ plain: true }));
-
-      res.render('homepage', {
-          post,
-          loggedIn: req.session.loggedIn,
-      });
-  } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-  }
-});
 
 
 module.exports = router;

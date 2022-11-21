@@ -1,15 +1,16 @@
-{{#if loggedIn}}
+{{!-- {{#if loggedIn}} --}}
 <section class="container">
     <h3>Recent Posts</h3>
     <section class="flex-row justify-center">
         {{#each posts as |post|}}
         <div class="card">
-            <h3><a href="/posts/{{id}}">{{title}}</a></h3>
-            <div class="card-body">
+            <h3><a href="/post/{{id}}">{{title}}</a></h3>
+            <h4>{{format_time createdAt}}</h4>
+            {{!-- <div class="card-body">
                 {{contents}}
-            </div>
+            </div> --}}
         </div>
         {{/each}}
     </section>
 </section>
- {{/if}}
+ {{!-- {{/if}} --}}
