@@ -1,8 +1,15 @@
 <div class="card">
   <h2>{{title}}</h2>
-  <h3>{{user.username}}</h3>
+  <h3>Written by {{user.username}}</h3>
   <h4>{{format_time createdAt}}</h4>
   <p>{{contents}}</p>
 </div>
-
-{{!-- add comments here? --}}
+ 
+ {{!-- add comments --}}
+ {{#each comments as |comment|}}
+  <div>
+    <h5>{{user.username}}</h5>
+    <p>{{comment.comment}}</p>
+    <p>{{comment.comment}}</p>
+  </div>
+ {{/each}}

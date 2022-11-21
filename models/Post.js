@@ -22,11 +22,11 @@ Post.init(
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    // date_created: {
-    //     type: DataTypes.DATETIME,
-    //     allowNull: false,
-    //     defaultValue: DataTypes.NOW,
-    // },
+    date_created: {
+        type: DataTypes.DATETIME,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+    },
     // reference id of the user that created the comment
     user_id: {
         type: DataTypes.INTEGER,

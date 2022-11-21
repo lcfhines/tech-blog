@@ -46,14 +46,23 @@ router.get('/post/:id', async (req, res) => {
   });
 
 // login route
+// req.sessionStore.loggedin?
 router.get('/login', (req, res) => {
-    if (req.sessionStore.loggedIn) {
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     } res.render('login');
 });
 
-
+// signup 
+// req.sessionStore.loggedin?
+router.get('/signup', (req,res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('signup');
+})
 
 
 
