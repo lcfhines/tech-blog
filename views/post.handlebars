@@ -5,7 +5,19 @@
   <p>{{contents}}</p>
 </div>
  
- {{!-- add comments --}}
+ <div>
+  <form class="comment-form" data-postid="{{id}}">
+    <div>
+      <textarea id="comment-content" name="comment-body"></textarea>
+    </div>
+    <div>
+      <button class="button" type="submit">Add Comment</button>
+    </div>
+  </form>
+ </div>
+
+
+ {{!-- display existing comments --}}
  <h2>Comments</h2>
  {{#each comments as |comment|}}
   <div>
