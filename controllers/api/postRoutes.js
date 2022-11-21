@@ -6,8 +6,8 @@ const { User, Post, Comment } = require('../../models')
 router.post('/', async (req, res) => {
     try {
         const postData = await Post.create({
-            title: req.body.title,
-            contents: req.body.contents,
+            ...req.body,
+            user_id: req.body.user_id,
         });
         res.status(200).json(postData)
     } catch (err) {
@@ -37,8 +37,7 @@ router.put('/:id', async (req, res) => {
 
 // delete post
     // delete post by id
-
-router.delete(':/id', async (req, res) => {
+router.delete('delete/:id', async (req, res) => {
     try {
         const postData = await Post.destroy({
             where: {
