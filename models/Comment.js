@@ -16,7 +16,7 @@ Comment.init(
         allowNull: false,
     },
     date_created: {
-        type: DataTypes.DATETIME,
+        type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
@@ -41,8 +41,7 @@ Comment.init(
 }, 
 {
     sequelize,
-    // change timestamps to true to include createdAt and updatedAt columns
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
     modelName: 'comment'
 }

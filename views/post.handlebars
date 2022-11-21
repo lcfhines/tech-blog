@@ -1,15 +1,16 @@
 <div class="card">
   <h2>{{title}}</h2>
   <h3>Written by {{user.username}}</h3>
-  <h4>{{format_time createdAt}}</h4>
+  <h4>{{format_date date_created}}</h4>
   <p>{{contents}}</p>
 </div>
  
  {{!-- add comments --}}
+ <h2>Comments</h2>
  {{#each comments as |comment|}}
   <div>
-    <h5>{{user.username}}</h5>
-    <p>{{comment.comment}}</p>
+    <h5>{{comment.user.username}}</h5>
+    <p>{{format_date comment.date_created}}</p>
     <p>{{comment.comment}}</p>
   </div>
  {{/each}}
