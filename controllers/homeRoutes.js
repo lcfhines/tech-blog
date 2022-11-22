@@ -45,24 +45,6 @@ router.get('/post/:id', async (req, res) => {
     }
   });
 
-// DASHBOARD - GET all posts logged in user has created
-router.get('/dashboard', async (req, res) => {
-    try {
-        const dbUserData = await User.findbyPk(req.session.user_id, {
-            include: [
-                {
-                    model: Post,
-                }
-            ]
-        });
-        const user = dbUserData.get({ plain: true });
-        res.render('dashboard', {...user, loggedIn: req.session.loggedIn});
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-    });
-
 // login route
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
@@ -79,7 +61,6 @@ router.get('/signup', (req,res) => {
     }
     res.render('signup');
 })
-
 
 
 module.exports = router;
