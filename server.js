@@ -12,11 +12,20 @@ const helpers = require('./utils/helpers');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
 // set up sessions
 const sess = {
   secret: 'secret',
+  // set to expire after 10 minutes of idle time
+  cookie: {
+    expires: 10 * 60 * 1000
+  },
   resave: false,
   saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
 };
 
 app.use(session(sess));
