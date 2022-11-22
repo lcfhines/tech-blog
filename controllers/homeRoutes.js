@@ -64,7 +64,6 @@ router.get('/dashboard', async (req, res) => {
     });
 
 // login route
-// req.sessionStore.loggedin?
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
@@ -73,7 +72,6 @@ router.get('/login', (req, res) => {
 });
 
 // signup 
-// req.sessionStore.loggedin?
 router.get('/signup', (req,res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
