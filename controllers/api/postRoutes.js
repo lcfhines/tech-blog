@@ -1,12 +1,13 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models')
+const { User, Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // create post
-    // enter title and contents
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try {
         const postData = await Post.create({
-            ...req.body,
+            title: req.body.title,
+            contents: req.body.contents,
             user_id: req.body.user_id,
         });
         res.status(200).json(postData)
@@ -16,9 +17,7 @@ router.post('/', async (req, res) => {
 });
 
 // update post by id
-    // change title or contents
-
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
     try {
         const post = await Post.update({
             title: req.body.title,
@@ -35,9 +34,8 @@ router.put('/:id', async (req, res) => {
     };
 });
 
-// delete post
-    // delete post by id
-router.delete('delete/:id', async (req, res) => {
+// delete post by id
+router.delete('delete/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.destroy({
             where: {

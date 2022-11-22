@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../models')
+const { User, Post, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
 // DASHBOARD - GET all posts logged in user has created
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
         const dbPostData = await Post.findAll({
         where: {
