@@ -19,7 +19,10 @@ const sess = {
   secret: 'secret',
   // set to expire after 10 minutes of idle time
   cookie: {
-    expires: 10 * 60 * 1000
+    maxAge: 300000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
   },
   resave: false,
   saveUninitialized: true,
@@ -39,9 +42,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((routes));
+app.use(require('./controllers'));
 
 // start the server
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+  sequelize.sync({ force: false })
 });
