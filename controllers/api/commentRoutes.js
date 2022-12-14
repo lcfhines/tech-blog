@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 // create comment
 router.post('/', withAuth, async (req, res) => {
-        if (req.session) {
+        // if (req.session) {
             try {
                 const newComment = await Comment.create({
                     comment: req.body.comment,
@@ -24,7 +24,7 @@ router.post('/', withAuth, async (req, res) => {
             } catch (err) {
                 res.status(500).json(err);
             }
-        }
+        // }
     })
 
 module.exports = router;

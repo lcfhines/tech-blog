@@ -19,16 +19,16 @@ router.post('/', withAuth, async (req, res) => {
 // update post by id
 router.put('/:id', withAuth, async (req, res) => {
     try {
-        const post = await Post.update({
-            title: req.body.title,
-            contents: req.body.contents,
-        },
-        {
+        const [posts] = await Post.update(req.body,{
             where: {
                 id: req.params.id,
             },
         });
-        res.status(200).json(post);
+        if (posts > 0) {
+            res.status(200).end();        
+        } else {
+            res.status(404).end();
+        }
     } catch (err) {
         res.status(500).json(err);
     };
@@ -37,18 +37,19 @@ router.put('/:id', withAuth, async (req, res) => {
 // delete post by id
 router.delete('delete/:id', withAuth, async (req, res) => {
     try {
-        const postData = await Post.destroy({
+        const [postData] = await Post.destroy({
             where: {
                 id: req.params.id,
-                user_id: req.session.user_id,
+                // user_id: req.session.user_id,
             },
         });
 
-        if (!postData) {
-            res.status(404).json({message: 'no post found with this id'});
-            return;
+        if (postData > 0) {
+            // we don't need to return the data when we're deleting
+            res.status(200).end();
+        } else {
+            res.status(404).end();
         }
-        res.status(200).json(postData);
     } catch (err) {
         res.status(500).json(err);
     }
