@@ -9,17 +9,17 @@ router.get('/', withAuth, async (req, res) => {
         where: {
             user_id: req.session.user_id
         },
-        include: [
-            {
-                model: Comment,
-                include: {
-                    model: User,
-                }
-            },
-            {
-                model: User,
-            }
-        ]
+        // include: [
+        //     {
+        //         model: Comment,
+        //         include: {
+        //             model: User,
+        //         }
+        //     },
+        //     {
+        //         model: User,
+        //     }
+        // ]
     })
     const posts = dbPostData.map(post => post.get({ plain: true }));
     res.render('dashboard', { posts, loggedIn: true });

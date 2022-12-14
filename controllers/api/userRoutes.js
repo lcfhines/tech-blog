@@ -58,14 +58,14 @@ router.post('/', async (req, res) => {
             username: req.body.username,
             passsword: req.body.password,
         })
-        .then (dbUserData => {
+        // .then (dbUserData => {
             // store session data
             req.session.save(() => {
                 req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
                 res.json(dbUserData);
-            });
+            // });
         });
     } catch (err) {
         console.log(err);
@@ -81,24 +81,24 @@ router.post('/login', async (req, res) => {
                 username: req.body.username,
             },
         })
-        .then(dbUserData => {
-            if (!dbUserData) {
-                res.status(400).json({message: 'Incorrect username or password. Please try again.'});
-                return;
-            }
-            const validPassword = dbUserData.checkPassword(req.body.password);
+        // .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({message: 'Incorrect username or password. Please try again.'});
+            return;
+        }
+        const validPassword = dbUserData.checkPassword(req.body.password);
             
-            if (!validPassword) {
-                res.status(400).json({message: 'Incorrect username or password. Please try again.'});
-                return;
-            }
-            req.session.save(() => {
-                req.session.user_id = dbUserData.id;
-                req.session.username = dbUserData.username;
-                req.session.loggedIn = true;
-                res.status(200).json({ user: dbUserData, message: 'You are now logged in'});
+        if (!validPassword) {
+            res.status(400).json({message: 'Incorrect username or password. Please try again.'});
+            return;
+        }
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+            res.status(200).json({ dbUserData, message: 'You are now logged in'});
             }) 
-        })
+        // })
      } catch (err) {
         console.log(err);
         res.status(500).json(err);
