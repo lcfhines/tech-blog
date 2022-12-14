@@ -6,13 +6,15 @@ const { User, Post, Comment } = require('../models')
 // GET all posts for homepage - if logged in
 router.get('/', async (req, res) => {
     try {
-        const dbPostData = await Post.findAll();
+        const dbPostData = await Post.findAll({
+            include: [User],
+        });
 
         const posts = dbPostData.map((post) => post.get({ plain: true }));
 
         res.render('homepage', {
             posts,
-            loggedIn: req.session.loggedIn,
+            // loggedIn: req.session.loggedIn,
         });
     } catch (err) {
         console.log(err);
@@ -25,20 +27,21 @@ router.get('/post/:id', async (req, res) => {
     try {
         const dbPostData = await Post.findByPk(req.params.id, {
             include: [
+                User,
                 {
-                    model: User,
-                    attributes: ['username'],
-                }, {
                     model: Comment,
                     include: [User]
                 }
             ],
         });
+        if (dbPostData) {
         const post = dbPostData.get({ plain: true });
-        res.render('post', {
-            ...post,
-            loggedIn: req.session.loggedIn,
-        });
+        res.render('post',
+            {post},
+        );
+        } else {
+            res.status(404).end();
+        }
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -54,7 +57,7 @@ router.get('/login', (req, res) => {
 });
 
 // signup 
-router.get('/signup', (req,res) => {
+router.get('/signup', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
         return;
